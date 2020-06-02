@@ -23,6 +23,7 @@ struct HomeView: View {
     var bg2 = Color.init(red: 109/255, green: 124/255, blue: 240/255)
     
     var body: some View {
+        NavigationView{
         VStack {
             Text("Welcome Back!")
                 .font(.system(size: 32, weight: .heavy, design: .default))
@@ -59,6 +60,7 @@ struct HomeView: View {
             }
         }
         .padding(.horizontal, 32)
+    }
     }
     
     func signIn(){
