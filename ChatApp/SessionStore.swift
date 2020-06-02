@@ -10,11 +10,11 @@ import SwiftUI
 import Firebase
 import Combine
 
-class sessionStore : ObservableObject{
+class SessionStore : ObservableObject{
     
     let ref = Database.database().reference()
     
-    var didChange = PassthroughSubject<sessionStore,Never>()
+    var didChange = PassthroughSubject<SessionStore,Never>()
     
     let uid = Auth.auth().currentUser?.uid ?? "uid"
     
