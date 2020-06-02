@@ -51,7 +51,7 @@ struct HomeView: View {
                 Text("new here?")
                     .font(.system(size: 14, weight: .light))
                     .foregroundColor(.primary)
-                NavigationLink(destination: Text("gey")){
+                NavigationLink(destination: SignupView()){
                     Text("Create an account")
                         .font(.system(size: 14, weight: .semibold))
                         .foregroundColor(bg2)

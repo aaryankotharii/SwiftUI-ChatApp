@@ -2,7 +2,7 @@
 //  Keyboard+notification.swift
 //  iShop SwiftUI
 //
-//  Created by Aaryan Kothari on 24/05/20.
+//  Created by Aaryan Kothari on 02/06/20.
 //  Copyright © 2020 Aaryan Kothari. All rights reserved.
 //
 
@@ -25,12 +25,10 @@ public class KeyboardInfo: ObservableObject {
     
     @objc func keyboardChanged(notification: Notification) {
         if notification.name == UIApplication.keyboardWillHideNotification {
-
             withAnimation {
                 self.keyboardIsUp = false
             }
         } else {
-         //   self.height = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect)?.height ?? 0
             withAnimation {
                 self.keyboardIsUp = true
             }
