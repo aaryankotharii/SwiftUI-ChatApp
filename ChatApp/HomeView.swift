@@ -15,6 +15,10 @@ struct HomeView: View {
     @State var error : String = ""
     @EnvironmentObject var session : SessionStore
     
+    @State private var showingAlert = false
+    @State var alertTitle : String = "Uh Oh 🙁"
+    
+    
     var bg1 = Color.init(red: 158/255, green: 152/255, blue: 240/255)
     var bg2 = Color.init(red: 109/255, green: 124/255, blue: 240/255)
     
@@ -47,6 +51,9 @@ struct HomeView: View {
                     .background(LinearGradient(gradient: Gradient(colors: [bg1,bg2]), startPoint: .leading, endPoint: .trailing))
                     .cornerRadius(5)
             }
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text(alertTitle), message: Text(error), dismissButton: .default(Text("OK")))
+            }
             Spacer()
             HStack{
                 Text("new here?")
@@ -63,15 +70,28 @@ struct HomeView: View {
     }
     
     func signIn(){
+        if let error = errorCheck(){
+            self.error = error
+            self.showingAlert = true
+            return
+        }
+        
         session.signIn(email: email, password: password) { (result, error) in
             if let error = error{
-                self.error = error.localizedDescription
+                self.error = error.authErrorValue
+                self.showingAlert = true
+                return
             }
-            else{
-                self.email = ""
-                self.password = ""
-            }
+            self.email = ""
+            self.password = ""
         }
+    }
+    
+    func errorCheck()->String?{
+        if email.trimmingCharacters(in: .whitespaces).isEmpty || password.trimmingCharacters(in: .whitespaces).isEmpty{
+            return "Please Fill in all the fields"
+        }
+        return nil
     }
 }
 
