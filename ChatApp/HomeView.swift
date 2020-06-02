@@ -31,15 +31,16 @@ struct HomeView: View {
                 .foregroundColor(bg1)
             
             VStack(spacing: 18){
+                Group{
                 TextField("Email address", text: $email)
-                    .modifier(CustomTextField())
                 SecureField("Password", text: $password)
+                }
                     .modifier(CustomTextField())
             }
             .padding(.vertical,64)
             
             Button(action: signIn){
-                Text("Signin")
+                Text("SIGN IN")
                 .modifier(CustomButton())
             }
             .alert(isPresented: $showingAlert) {
