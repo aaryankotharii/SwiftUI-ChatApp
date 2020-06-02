@@ -32,24 +32,15 @@ struct HomeView: View {
             
             VStack(spacing: 18){
                 TextField("Email address", text: $email)
-                    .font(.system(size:14))
-                    .padding(12)
-                    .background(RoundedRectangle(cornerRadius: 5).strokeBorder(bg1, lineWidth: 1 ))
+                    .modifier(CustomTextField())
                 SecureField("Password", text: $password)
-                    .font(.system(size:14))
-                    .padding(12)
-                    .background(RoundedRectangle(cornerRadius: 5).strokeBorder(bg1, lineWidth: 1 ))
+                    .modifier(CustomTextField())
             }
             .padding(.vertical,64)
             
             Button(action: signIn){
                 Text("Signin")
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                    .frame(height: 50)
-                    .foregroundColor(.white)
-                    .font(.system(size:14, weight: .bold))
-                    .background(LinearGradient(gradient: Gradient(colors: [bg1,bg2]), startPoint: .leading, endPoint: .trailing))
-                    .cornerRadius(5)
+                .modifier(CustomButton())
             }
             .alert(isPresented: $showingAlert) {
                 Alert(title: Text(alertTitle), message: Text(error), dismissButton: .default(Text("OK")))
