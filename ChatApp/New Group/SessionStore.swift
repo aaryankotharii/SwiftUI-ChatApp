@@ -31,7 +31,7 @@ class SessionStore : ObservableObject{
         }
     }
     @Published var messagesDictionary = [String:Message]()
-    
+        
     var handle : AuthStateDidChangeListenerHandle?
     
     func listen(){
@@ -76,19 +76,19 @@ class SessionStore : ObservableObject{
     }
     
     func observeUserMessages(){
-
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let reference = self.ref.child("user-messages").child(uid)
         
         reference.observe(.childAdded, with: { (snapshot) in
-
+            
             let messageId = snapshot.key
             
             let messagesReference = Database.database().reference().child("messages").child(messageId)
             
             messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
-
+                
                 if let dictionary = snapshot.value as? [String:AnyObject]{
                     
                     var message = Message(id: snapshot.key)
@@ -120,21 +120,21 @@ class SessionStore : ObservableObject{
     }
     
     func observeMessages(completion : @escaping ([String:AnyObject],String)->()){
-     guard let uid = Auth.auth().currentUser?.uid else {return}
-     
-     let userMessagesref = ref.child("user-messages").child(uid)
-     
-     userMessagesref.observe(.childAdded, with: { (snapshot) in
+        guard let uid = Auth.auth().currentUser?.uid else {return}
         
-         let messageId = snapshot.key
-         
-         let messagesRef = Database.database().reference().child("messages").child(messageId)
+        let userMessagesref = ref.child("user-messages").child(uid)
         
-         messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+        userMessagesref.observe(.childAdded, with: { (snapshot) in
             
-        guard let dictionary = snapshot.value as?[String:AnyObject] else { return }
-             
-            completion(dictionary,snapshot.key)
+            let messageId = snapshot.key
+            
+            let messagesRef = Database.database().reference().child("messages").child(messageId)
+            
+            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let dictionary = snapshot.value as?[String:AnyObject] else { return }
+                
+                completion(dictionary,snapshot.key)
             }, withCancel: nil)
         }, withCancel: nil)
     }
@@ -152,7 +152,7 @@ class SessionStore : ObservableObject{
     }
     
     func createUser(user:UserData){
-        let param = ["name":user.name,"email":user.email,"imageUrl":user.profileImageUrl]
+        let param = ["name":user.name,"email":user.email,"profileImageUrl":user.profileImageUrl]
         ref.child("users").child(getUID()).setValue(param) { (error, ref) in
             if let error = error{
                 print(error)
@@ -178,40 +178,52 @@ class SessionStore : ObservableObject{
         }
     }
     
+    func getUserFromMSG(_ message : Message)->UserData{
+        
+        if let chatPatnerId = message.chatPatnerId(){
+            
+            let user =  self.users.filter { $0.id == chatPatnerId }
+            
+            return user.first!
+        }
+        return UserData()
+    }
+    
+    
     //MARK:- Send Message to firebase
     func sendData(user : UserData, message : String){
-         let reference = ref.child("messages")
-                
-         let childRef = reference.childByAutoId()
-                
+        let reference = ref.child("messages")
+        
+        let childRef = reference.childByAutoId()
+        
         let toId = user.id
-         
-         let fromId = Auth.auth().currentUser!.uid
-         
-         let timeStamp = Int(NSDate().timeIntervalSince1970)
-         
+        
+        let fromId = Auth.auth().currentUser!.uid
+        
+        let timeStamp = Int(NSDate().timeIntervalSince1970)
+        
         let values = ["text":message, "toId":toId!, "fromId":fromId,"timestamp":timeStamp] as [String : Any]
+        
+        childRef.updateChildValues(values) { (error, ref) in
+            
+            if let error = error{
                 
-         childRef.updateChildValues(values) { (error, ref) in
-             
-             if let error = error{
-                 
-                 print(error.localizedDescription)
-                 
-             }else{
-                                                   
-                 let userMessagesRef = Database.database().reference().child("user-messages").child(fromId)
-                 
-                 let messageId = childRef.key!
-                 
-                 userMessagesRef.updateChildValues([messageId:"a"])
-                 
+                print(error.localizedDescription)
+                
+            }else{
+                
+                let userMessagesRef = Database.database().reference().child("user-messages").child(fromId)
+                
+                let messageId = childRef.key!
+                
+                userMessagesRef.updateChildValues([messageId:"a"])
+                
                 let recipientUserMessagesReference = Database.database().reference().child("user-messages").child(toId ?? "")
-                 
-                 recipientUserMessagesReference.updateChildValues([messageId:"a"])
-             }
-         }
-     }
+                
+                recipientUserMessagesReference.updateChildValues([messageId:"a"])
+            }
+        }
+    }
 }
 
 

@@ -34,7 +34,7 @@
 /* Begin PBXFileReference section */
 		2C98D524C2D04431CE08163B /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		5B375B312486984C00935300 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B375B342486984C00935300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5B375B342486984C00935300 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "../New Group2/AppDelegate.swift"; sourceTree = "<group>"; };
 		5B375B362486984C00935300 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5B375B382486984C00935300 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5B375B3A2486985300935300 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -102,19 +102,16 @@
 		5B375B332486984C00935300 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				5B375B6A2488206300935300 /* App */,
 				5B375B582487552000935300 /* Model */,
 				5B375B5B2487555300935300 /* Utilities */,
 				5B375B5A2487554200935300 /* CustomView */,
 				5B375B592487552E00935300 /* View */,
-				5B375B4E2486C15F00935300 /* ErrorHandler.swift */,
-				5B375B342486984C00935300 /* AppDelegate.swift */,
-				5B375B362486984C00935300 /* SceneDelegate.swift */,
 				5B375B3A2486985300935300 /* Assets.xcassets */,
 				5B375B3F2486985300935300 /* LaunchScreen.storyboard */,
 				5B375B422486985300935300 /* Info.plist */,
 				5B375B482486997D00935300 /* GoogleService-Info.plist */,
 				5B375B3C2486985300935300 /* Preview Content */,
-				5B375B60248756BD00935300 /* Constants.swift */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -162,10 +159,21 @@
 		5B375B5B2487555300935300 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5B375B60248756BD00935300 /* Constants.swift */,
+				5B375B4E2486C15F00935300 /* ErrorHandler.swift */,
 				5B375B562486C8AD00935300 /* Keyboard+notification.swift */,
 				5B375B542486C66400935300 /* ImagePicker.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		5B375B6A2488206300935300 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5B375B342486984C00935300 /* AppDelegate.swift */,
+				5B375B362486984C00935300 /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		5DD1D17CD139AEC49D583509 /* Frameworks */ = {

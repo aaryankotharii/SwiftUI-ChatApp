@@ -26,7 +26,6 @@ struct ChatRow : View {
                     Text(text).padding(10).background(Color.secondary)
                         .cornerRadius(18)
                         .foregroundColor(.white)
-                    
                     //                    Image(uiImage: UIImage(data: self.image)!).resizable()
                     //                        .frame(width: 45, height: 45)
                     //                    .clipShape(Circle())
@@ -42,11 +41,25 @@ struct ChatRow : View {
                     Text(text).padding(10).background(Color.blue)
                         .cornerRadius(28)
                         .foregroundColor(.white)
-                    
                 }
                 Spacer()
             }
-        }.frame(minWidth: 50, maxWidth: 200)
+        }
+    }
+}
+
+
+struct ChatViewRow : View {
+    var user : UserData
+    var message : Message
+    var body : some View {
+        HStack{
+            Image(systemName : "person.fill")
+            VStack{
+                Text(user.name ?? "")
+                Text(message.text ?? "")
+            }
+        }
     }
 }
 

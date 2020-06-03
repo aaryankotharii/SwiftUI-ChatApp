@@ -13,18 +13,14 @@ struct ChatsView: View {
     @EnvironmentObject var session : SessionStore
     @State var showNewChatsView : Bool = false
     @State var user = UserData()
-    @State var activateNavigation : Bool = true
+    @State var activateNavigation : Bool = false
     
     var body: some View {
         NavigationView{
             List(session.messages) { message in
-                //                Button(action: { self.getUser(message) })
-                //                {
-                //                    NavigationLink(destination: ChatLogView(user: self.user), isActive: self.$activateNavigation) {
-                //                        Text(message.text!)
-                //                    }
-                //                }
-                    Text(message.text!)                
+                NavigationLink(destination: ChatLogView(user: self.session.getUserFromMSG(message))) {
+                    ChatViewRow(user: self.session.getUserFromMSG(message), message : message)
+                    }
             }
             .navigationBarTitle(Text("Chats"), displayMode: .large)
             .navigationBarItems(leading: logoutButton, trailing: newChatButton
