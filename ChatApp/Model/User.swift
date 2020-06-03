@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserData: NSObject {
+struct UserData: Identifiable {
     var email : String?
     var name : String?
     var profileImageUrl : String?

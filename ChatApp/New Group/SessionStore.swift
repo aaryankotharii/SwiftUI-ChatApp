@@ -24,6 +24,7 @@ class SessionStore : ObservableObject{
         }
     }
     
+    @Published var users = [UserData]()
     
     var handle : AuthStateDidChangeListenerHandle?
     
@@ -110,7 +111,17 @@ class SessionStore : ObservableObject{
         }, withCancel: nil)
     }
     
-    
+    func fetchUsers(){
+        ref.child("users").observe(.childAdded, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject] {
+                var user = UserData()
+                user.name = (dictionary["name"] as! String)
+                user.email = (dictionary["email"] as! String)
+                user.id = snapshot.key
+                self.users.append(user)
+            }
+        }, withCancel: nil)
+    }
 }
 
 struct User {
