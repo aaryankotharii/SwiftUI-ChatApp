@@ -22,6 +22,7 @@
 		5B375B552486C66400935300 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B542486C66400935300 /* ImagePicker.swift */; };
 		5B375B572486C8AD00935300 /* Keyboard+notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B562486C8AD00935300 /* Keyboard+notification.swift */; };
 		5B375B5D2487556C00935300 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B5C2487556C00935300 /* User.swift */; };
+		5B375B5F248756A000935300 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B5E248756A000935300 /* Message.swift */; };
 		720CD5ABEBE5F44D704FBBB5 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74F6CF375EDCA4EECAB9C71 /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		5B375B542486C66400935300 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		5B375B562486C8AD00935300 /* Keyboard+notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Keyboard+notification.swift"; sourceTree = "<group>"; };
 		5B375B5C2487556C00935300 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		5B375B5E248756A000935300 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		6B298B996159DD6A77E5C70F /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F74F6CF375EDCA4EECAB9C71 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 			children = (
 				5B375B4A24869C3800935300 /* SessionStore.swift */,
 				5B375B5C2487556C00935300 /* User.swift */,
+				5B375B5E248756A000935300 /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				5B375B532486C63200935300 /* CustomModifiers.swift in Sources */,
 				5B375B4B24869C3800935300 /* SessionStore.swift in Sources */,
 				5B375B392486984C00935300 /* HomeView.swift in Sources */,
+				5B375B5F248756A000935300 /* Message.swift in Sources */,
 				5B375B572486C8AD00935300 /* Keyboard+notification.swift in Sources */,
 				5B375B5D2487556C00935300 /* User.swift in Sources */,
 			);

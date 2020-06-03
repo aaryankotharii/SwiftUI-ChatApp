@@ -64,6 +64,8 @@ class SessionStore : ObservableObject{
     deinit {
         unbind()
     }
+    
+    
 
 }
 
