@@ -105,6 +105,10 @@ struct SignupView: View {
                 self.showingAlert = true
                 return
             }
+            
+            guard let result = result else { return }
+            
+            self.session.createUser(user: UserData(email: self.email, name: self.name, profileImageUrl: "idk", id: result.user.uid))
             ///UPLAOD USER DATA
             
             /*

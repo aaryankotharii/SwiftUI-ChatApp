@@ -22,7 +22,7 @@ struct ChatsView: View {
         .navigationBarTitle(Text("Chats"), displayMode: .large)
         .navigationBarItems(leading: logoutButton, trailing: newChatButton
         .sheet(isPresented: $showNewChatsView) {
-            NewChatsView()
+            NewChatsView().environmentObject(self.session)
         })
         }
     }

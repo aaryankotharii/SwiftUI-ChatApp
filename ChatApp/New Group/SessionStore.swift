@@ -122,6 +122,15 @@ class SessionStore : ObservableObject{
             }
         }, withCancel: nil)
     }
+    
+    func createUser(user:UserData){
+        let param = ["name":user.name,"email":user.email,"imageUrl":user.profileImageUrl]
+        ref.child("users").child(getUID()).setValue(param) { (error, ref) in
+            if let error = error{
+                print(error)
+            }
+        }
+    }
 }
 
 struct User {
