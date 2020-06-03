@@ -33,6 +33,7 @@ class SessionStore : ObservableObject{
             if let user = user {
                 print("user state changed")
                 self.session = User(uid: user.uid, email: user.email)
+                self.fetchUsers()
             } else {
                 self.session = nil
             }
@@ -58,6 +59,7 @@ class SessionStore : ObservableObject{
     
     func unbind(){
         if let handle = handle {
+            print("unbind")
             Auth.auth().removeStateDidChangeListener(handle)
         }
     }

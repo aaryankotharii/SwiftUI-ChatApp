@@ -14,8 +14,8 @@ struct NewChatsView: View {
         NavigationView{
             List(session.users) { user in
                 Text(user.name!)
-            }
-        }.onAppear(perform: session.fetchUsers)
+            }.navigationBarTitle(Text("New Chat"), displayMode: .inline)
+        }
     }
 }
 
