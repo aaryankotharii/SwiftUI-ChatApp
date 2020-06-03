@@ -29,6 +29,7 @@ struct ChatLogView: View {
                     if self.write.count > 0 {
                         /// send message
                        // self.message.addInfo(msg: self.write, user: self.name, image: self.image)
+                        self.session.sendData(user: self.user, message: self.write)
                         self.write = ""
                     } else {
                         

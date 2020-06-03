@@ -177,7 +177,43 @@ class SessionStore : ObservableObject{
             completion(user)
         }
     }
+    
+    //MARK:- Send Message to firebase
+    func sendData(user : UserData, message : String){
+         let reference = ref.child("messages")
+                
+         let childRef = reference.childByAutoId()
+                
+        let toId = user.id
+         
+         let fromId = Auth.auth().currentUser!.uid
+         
+         let timeStamp = Int(NSDate().timeIntervalSince1970)
+         
+        let values = ["text":message, "toId":toId!, "fromId":fromId,"timestamp":timeStamp] as [String : Any]
+                
+         childRef.updateChildValues(values) { (error, ref) in
+             
+             if let error = error{
+                 
+                 print(error.localizedDescription)
+                 
+             }else{
+                                                   
+                 let userMessagesRef = Database.database().reference().child("user-messages").child(fromId)
+                 
+                 let messageId = childRef.key!
+                 
+                 userMessagesRef.updateChildValues([messageId:"a"])
+                 
+                let recipientUserMessagesReference = Database.database().reference().child("user-messages").child(toId ?? "")
+                 
+                 recipientUserMessagesReference.updateChildValues([messageId:"a"])
+             }
+         }
+     }
 }
+
 
 struct User {
     var uid : String
