@@ -26,6 +26,7 @@
 		5B375B61248756BD00935300 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B60248756BD00935300 /* Constants.swift */; };
 		5B375B63248758EB00935300 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B62248758EB00935300 /* ChatsView.swift */; };
 		5B375B6524875F8F00935300 /* NewChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B6424875F8F00935300 /* NewChatsView.swift */; };
+		5B375B672487C4D900935300 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B662487C4D900935300 /* ChatLogView.swift */; };
 		720CD5ABEBE5F44D704FBBB5 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74F6CF375EDCA4EECAB9C71 /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		5B375B60248756BD00935300 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5B375B62248758EB00935300 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
 		5B375B6424875F8F00935300 /* NewChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatsView.swift; sourceTree = "<group>"; };
+		5B375B662487C4D900935300 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		6B298B996159DD6A77E5C70F /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F74F6CF375EDCA4EECAB9C71 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -141,6 +143,7 @@
 				5B375B502486C2B300935300 /* SignUpView.swift */,
 				5B375B62248758EB00935300 /* ChatsView.swift */,
 				5B375B6424875F8F00935300 /* NewChatsView.swift */,
+				5B375B662487C4D900935300 /* ChatLogView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 				5B375B512486C2B400935300 /* SignUpView.swift in Sources */,
 				5B375B4F2486C15F00935300 /* ErrorHandler.swift in Sources */,
 				5B375B532486C63200935300 /* CustomModifiers.swift in Sources */,
+				5B375B672487C4D900935300 /* ChatLogView.swift in Sources */,
 				5B375B61248756BD00935300 /* Constants.swift in Sources */,
 				5B375B4B24869C3800935300 /* SessionStore.swift in Sources */,
 				5B375B392486984C00935300 /* HomeView.swift in Sources */,

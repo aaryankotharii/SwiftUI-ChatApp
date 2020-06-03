@@ -13,7 +13,9 @@ struct NewChatsView: View {
     var body: some View {
         NavigationView{
             List(session.users) { user in
-                Text(user.name!)
+                NavigationLink(destination: ChatLogView(user: user)) {
+                    Text(user.name ?? "Unknown")
+                }
             }.navigationBarTitle(Text("New Chat"), displayMode: .inline)
         }
     }
