@@ -17,12 +17,12 @@ struct ChatLogView: View {
     var body: some View {
         VStack {
             List(messages) { message in
-                if message.fromId == session.id {
-                    
+                if message.fromId == self.session.session?.uid{
+                    Text(message.text!).foregroundColor(.red)
+                } else {
+                    Text(message.text!).foregroundColor(.blue)
                 }
-                Text(message.text!)
-            }.navigationBarTitle(Text(user.name ?? "Unknown"), displayMode: .inline)
-            
+            }
             HStack {
                 TextField("message...",text: self.$write).padding(10)
                     .background(Color(red: 233.0/255, green: 234.0/255, blue: 243.0/255))
@@ -44,7 +44,8 @@ struct ChatLogView: View {
                 }
             }.padding()
             
-        }.onAppear(perform: getMessages)
+        }.navigationBarTitle(Text(user.name ?? "Unknown"), displayMode: .inline)
+        .onAppear(perform: getMessages)
     }
     func getMessages(){
         session.observeMessages { (dictionary,id) in
