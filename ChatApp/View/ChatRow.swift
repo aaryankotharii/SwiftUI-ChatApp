@@ -8,14 +8,45 @@
 
 import SwiftUI
 
-struct ChatRow: View {
+struct ChatRow : View {
+    
+    var text = ""
+    
+    var myMessage = false
+  //  var user = ""
+    
+   // @Binding var image : Data
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        HStack {
+            if myMessage {
+                Spacer()
+                
+                HStack {
+                    Text(text).padding(10).background(Color.secondary)
+                        .cornerRadius(18)
+                        .foregroundColor(.white)
+                    
+                    //                    Image(uiImage: UIImage(data: self.image)!).resizable()
+                    //                        .frame(width: 45, height: 45)
+                    //                    .clipShape(Circle())
+                    //                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                }
+            } else {
+                HStack {
+                    //                    Image(uiImage: UIImage(data: self.image)!).resizable()
+                    //                        .frame(width: 45, height: 45)
+                    //                    .clipShape(Circle())
+                    //                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                    
+                    Text(text).padding(10).background(Color.blue)
+                        .cornerRadius(28)
+                        .foregroundColor(.white)
+                    
+                }
+                Spacer()
+            }
+        }.frame(minWidth: 50, maxWidth: 200)
     }
 }
 
-struct ChatRow_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatRow()
-    }
-}

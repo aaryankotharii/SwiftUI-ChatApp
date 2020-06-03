@@ -18,9 +18,9 @@ struct ChatLogView: View {
         VStack {
             List(messages) { message in
                 if message.fromId == self.session.session?.uid{
-                    Text(message.text!).foregroundColor(.red)
+                    ChatRow(text: message.text ?? "", myMessage: true)
                 } else {
-                    Text(message.text!).foregroundColor(.blue)
+                    ChatRow(text: message.text ?? "", myMessage: false)
                 }
             }
             HStack {
