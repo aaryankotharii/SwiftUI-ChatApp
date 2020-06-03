@@ -80,7 +80,7 @@ class SessionStore : ObservableObject{
                 
                 if let dictionary = snapshot.value as? [String:AnyObject]{
                     
-                    let message = Message()
+                    var message = Message(id: snapshot.key)
                     
                     if let text = dictionary["text"]{ message.text = text  as? String }
                     message.fromId = (dictionary["fromId"] as! String)

@@ -9,8 +9,8 @@
 import UIKit
 import FirebaseAuth
 
-class Message: NSObject {
-    
+struct Message: Identifiable {
+    var id : String
     var fromId: String?
     var text : String?
     var timestamp : Int?

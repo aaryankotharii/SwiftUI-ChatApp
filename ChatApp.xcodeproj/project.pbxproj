@@ -134,8 +134,8 @@
 		5B375B592487552E00935300 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5B375B382486984C00935300 /* HomeView.swift */,
 				5B375B4C2486B9DA00935300 /* ContentView.swift */,
+				5B375B382486984C00935300 /* HomeView.swift */,
 				5B375B502486C2B300935300 /* SignUpView.swift */,
 				5B375B62248758EB00935300 /* ChatsView.swift */,
 			);
