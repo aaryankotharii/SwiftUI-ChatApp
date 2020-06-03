@@ -25,6 +25,12 @@ class SessionStore : ObservableObject{
     }
     
     @Published var users = [UserData]()
+    @Published var messages = [Message](){
+        didSet{
+            print(messages)
+        }
+    }
+    @Published var messagesDictionary = [String:Message]()
     
     var handle : AuthStateDidChangeListenerHandle?
     
@@ -34,6 +40,7 @@ class SessionStore : ObservableObject{
                 print("user state changed")
                 self.session = User(uid: user.uid, email: user.email)
                 self.fetchUsers()
+                self.observeUserMessages()
             } else {
                 self.session = nil
             }
@@ -68,19 +75,20 @@ class SessionStore : ObservableObject{
         unbind()
     }
     
-    func observeUserMessages(completion : @escaping ([Message],[String:Message])->()){
+    func observeUserMessages(){
+
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
         let reference = self.ref.child("user-messages").child(uid)
         
         reference.observe(.childAdded, with: { (snapshot) in
-            
+
             let messageId = snapshot.key
             
             let messagesReference = Database.database().reference().child("messages").child(messageId)
             
             messagesReference.observeSingleEvent(of: .value, with: { (snapshot) in
-                
+
                 if let dictionary = snapshot.value as? [String:AnyObject]{
                     
                     var message = Message(id: snapshot.key)
@@ -90,25 +98,43 @@ class SessionStore : ObservableObject{
                     message.toId = (dictionary["toId"] as! String)
                     message.timestamp = (dictionary["timestamp"] as! Int)
                     
-                    
+                    print(message)
                     if let chatPatnerId = message.chatPatnerId() {
                         
-                        var messagesDictionary = [String:Message]()
-                        messagesDictionary[chatPatnerId]  = message
+                        self.messagesDictionary[chatPatnerId]  = message
                         
-                        var messages = Array(messagesDictionary.values)
+                        self.messages = Array(self.messagesDictionary.values)
                         
                         //MARK:- Sort messages Array
-                        messages.sort { (message1, message2) -> Bool in
+                        self.messages.sort { (message1, message2) -> Bool in
                             var bool = false
                             if let time1 = message1.timestamp, let time2 = message2.timestamp {
                                 bool = time1 > time2
                             }
                             return bool
                         }
-                        completion(messages,messagesDictionary)
                     }
                 }
+            }, withCancel: nil)
+        }, withCancel: nil)
+    }
+    
+    func observeMessages(completion : @escaping ([String:AnyObject],String)->()){
+     guard let uid = Auth.auth().currentUser?.uid else {return}
+     
+     let userMessagesref = ref.child("user-messages").child(uid)
+     
+     userMessagesref.observe(.childAdded, with: { (snapshot) in
+        
+         let messageId = snapshot.key
+         
+         let messagesRef = Database.database().reference().child("messages").child(messageId)
+        
+         messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+        guard let dictionary = snapshot.value as?[String:AnyObject] else { return }
+             
+            completion(dictionary,snapshot.key)
             }, withCancel: nil)
         }, withCancel: nil)
     }
@@ -131,6 +157,24 @@ class SessionStore : ObservableObject{
             if let error = error{
                 print(error)
             }
+        }
+    }
+    
+    func getUserFromMessage(_ message : Message,completion: @escaping (UserData)->()){
+        guard let chatPatnerId = message.chatPatnerId() else { return }
+        
+        
+        ref.child("users").child(chatPatnerId).observe(.value) { (snapshot) in
+            guard let dictionary = snapshot.value as? [String:AnyObject]  else { return}
+            
+            var user = UserData()
+            
+            user.name = (dictionary["name"] as! String)
+            user.email = (dictionary["email"] as! String)
+            user.profileImageUrl = (dictionary["profileImageUrl"] as! String)
+            user.id = chatPatnerId
+            
+            completion(user)
         }
     }
 }

@@ -9,21 +9,28 @@
 import SwiftUI
 
 struct ChatsView: View {
-   @State var messages = [Message]()
-   @State var messagesDictionary = [String:Message]()
+    @State var messagesDictionary = [String:Message]()
     @EnvironmentObject var session : SessionStore
     @State var showNewChatsView : Bool = false
-
+    @State var user = UserData()
+    @State var activateNavigation : Bool = true
+    
     var body: some View {
         NavigationView{
-        List(messages) { message in
-            Text(message.text!)
-        }
-        .navigationBarTitle(Text("Chats"), displayMode: .large)
-        .navigationBarItems(leading: logoutButton, trailing: newChatButton
-        .sheet(isPresented: $showNewChatsView) {
-            NewChatsView().environmentObject(self.session)
-        })
+            List(session.messages) { message in
+                //                Button(action: { self.getUser(message) })
+                //                {
+                //                    NavigationLink(destination: ChatLogView(user: self.user), isActive: self.$activateNavigation) {
+                //                        Text(message.text!)
+                //                    }
+                //                }
+                    Text(message.text!)                
+            }
+            .navigationBarTitle(Text("Chats"), displayMode: .large)
+            .navigationBarItems(leading: logoutButton, trailing: newChatButton
+            .sheet(isPresented: $showNewChatsView) {
+                NewChatsView().environmentObject(self.session)
+            })
         }
     }
     
@@ -39,15 +46,15 @@ struct ChatsView: View {
         }
     }
     
-    func observe(){
-        session.observeUserMessages(completion: getMessages(messages:messagesDictionary:))
-    }
-    func getMessages(messages:[Message],messagesDictionary:[String:Message]){
-        self.messages = messages
-        self.messagesDictionary = messagesDictionary
-    }
     func newChat(){
         showNewChatsView = true
+    }
+    
+    func getUser(_ message : Message){
+        session.getUserFromMessage(message) { (user) in
+            self.user = user
+            self.activateNavigation = true
+        }
     }
 }
 
