@@ -17,6 +17,9 @@ struct ChatLogView: View {
     var body: some View {
         VStack {
             List(messages) { message in
+                if message.fromId == session.id {
+                    
+                }
                 Text(message.text!)
             }.navigationBarTitle(Text(user.name ?? "Unknown"), displayMode: .inline)
             
@@ -28,7 +31,6 @@ struct ChatLogView: View {
                 Button(action: {
                     if self.write.count > 0 {
                         /// send message
-                       // self.message.addInfo(msg: self.write, user: self.name, image: self.image)
                         self.session.sendData(user: self.user, message: self.write)
                         self.write = ""
                     } else {
@@ -42,7 +44,7 @@ struct ChatLogView: View {
                 }
             }.padding()
             
-    }
+        }.onAppear(perform: getMessages)
     }
     func getMessages(){
         session.observeMessages { (dictionary,id) in
