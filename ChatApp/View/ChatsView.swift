@@ -20,8 +20,11 @@ struct ChatsView: View {
             Text(message.text!)
         }
         .navigationBarTitle(Text("Chats"), displayMode: .large)
-        .navigationBarItems(leading: logoutButton)
-        }.popover(isPresented: $showNewChatsView, content: Text("new chats"))
+        .navigationBarItems(leading: logoutButton, trailing: newChatButton
+        .sheet(isPresented: $showNewChatsView) {
+            NewChatsView()
+        })
+        }
     }
     
     var logoutButton : Button<Text> {
