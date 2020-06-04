@@ -60,17 +60,17 @@ struct ChatViewRow : View {
         HStack{
             profilePicture.padding(.trailing,10)
             VStack(alignment: .leading, spacing: 3){
-                Text(user.name ?? "")
-                    .font(.system(size: 15, weight: .bold))
+                HStack{
+                    Text(user.name ?? "")
+                        .font(.system(size: 15, weight: .semibold))
+                    Spacer()
+                    Text("\(message.timestamp?.timeStringConverter ?? "")")
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(.blue)
+                }
                 Text(message.text ?? "")
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.secondary)
-            }
-            Spacer()
-            VStack{
-                Text("\(message.timestamp?.timeStringConverter ?? "")")
-                    .padding(.top,12)
-                Spacer()
             }
         }
     }
@@ -82,7 +82,7 @@ struct ChatViewRow : View {
             configuration: { $0.resizable().renderingMode(.original) }
         )
             .aspectRatio(contentMode: .fit)
-            .frame(idealHeight: 60 )
+            .frame(idealHeight: 56 )
             .clipShape(Circle())
     }
 }

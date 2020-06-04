@@ -18,11 +18,16 @@ struct ChatsView: View {
     var body: some View {
         NavigationView{
             List(session.messages) { message in
-                NavigationLink(destination: ChatLogView(user: self.session.getUserFromMSG(message))) {
+                
+                ZStack {
+                    NavigationLink(destination: ChatLogView(user: self.session.getUserFromMSG(message))) {
+                        EmptyView()
+                    }.hidden()
                     ChatViewRow(user: self.session.getUserFromMSG(message), message : message)
                 }
-                //.listRowInsets(EdgeInsets(top: -20, leading: -20, bottom: -20, trailing: -20))
-                }
+                
+                
+            }
             .navigationBarTitle(Text("Chats"), displayMode: .large)
             .navigationBarItems(leading: logoutButton, trailing: newChatButton
             .sheet(isPresented: $showNewChatsView) {
