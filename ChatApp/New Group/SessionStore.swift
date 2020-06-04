@@ -90,6 +90,7 @@ class SessionStore : ObservableObject{
                     var message = Message()
                     
                     if let text = dictionary["text"]{ message.text = text  as? String }
+                    if let imageUrl = dictionary["imageUrl"]{ message.imageUrl = imageUrl  as? String }
                     message.fromId = (dictionary["fromId"] as! String)
                     message.toId = (dictionary["toId"] as! String)
                     message.timestamp = (dictionary["timestamp"] as! Int)
@@ -187,7 +188,7 @@ class SessionStore : ObservableObject{
     
     
     //MARK:- Send Message to firebase
-    func sendData(user : UserData, message : String){
+    func sendData(user : UserData, message : String, imageUrl : String? = nil){
         let reference = ref.child("messages")
         
         let childRef = reference.childByAutoId()
@@ -198,7 +199,9 @@ class SessionStore : ObservableObject{
         
         let timeStamp = Int(NSDate().timeIntervalSince1970)
         
-        let values = ["text":message, "toId":toId!, "fromId":fromId,"timestamp":timeStamp] as [String : Any]
+        var values = ["text":message, "toId":toId!, "fromId":fromId,"timestamp":timeStamp] as [String : Any]
+        
+        if let imageUrl = imageUrl { values["imageUrl"] = imageUrl }
         
         childRef.updateChildValues(values) { (error, ref) in
             
@@ -222,40 +225,43 @@ class SessionStore : ObservableObject{
     }
     
     //MARK:- Update profile picture
-     func updateProfileImage(url: String,completion:@escaping (Bool) -> ()) {
+     func updateProfileImage(url: String) {
         let ref = self.ref.child("users").child(session?.uid ?? "uid")
-        ref.updateChildValues(["imageUrl":url]) { (error, ref) in
-            if let _ = error{ completion(false) ;  return }
-            completion(true)
-        }
+        ref.updateChildValues(["imageUrl":url])
     }
     
     func createProfile(_ profileImage : UIImage){
-        
-        print("IMAGE UPLAOD")
-        //  let uid = session?.uid ?? "uid"
-        let ref = Storage.storage().reference()
-        let storageRef = ref.child("profile_images").child("\(uid).jpg")
-        
-        if let uploadData = profileImage.jpegData(compressionQuality: 0.2){    /// convert image to data
-            storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    
-                    storageRef.downloadURL { (url, error) in    /// get url from storage
-                        if let error = error {
-                            print(error.localizedDescription)
-                        }else{
-                            // Update profile URL
-                            self.updateProfileImage(url: url?.absoluteString ?? "invalid") { (success) in
-                            }
-                        }
+        uplaodImage(profileImage) { (url) in
+            if let url = url {
+            self.updateProfileImage(url: url)
+            }
+        }
+    }
+
+func uplaodImage(_ profileImage : UIImage, completion : @escaping (String?)->()){
+    print("IMAGE UPLAOD")
+    let ref = Storage.storage().reference()
+    let storageRef = ref.child("profile_images").child("\(uid).jpg")
+    
+    if let uploadData = profileImage.jpegData(compressionQuality: 0.2){    /// convert image to data
+        storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+            if let error = error {
+                completion(nil)
+                print(error.localizedDescription)
+            } else {
+                
+                storageRef.downloadURL { (url, error) in    /// get url from storage
+                    if let error = error {
+                        completion(nil)
+                        print(error.localizedDescription)
+                    }else{
+                        completion(url?.absoluteString ?? "inavlid")
                     }
                 }
             }
         }
     }
+}
 }
 
 

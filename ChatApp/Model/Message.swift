@@ -15,6 +15,7 @@ struct Message: Hashable {
     var text : String?
     var timestamp : Int?
     var toId : String?
+    var imageUrl : String?
     
     var id : String {
         if fromId == getUID(){

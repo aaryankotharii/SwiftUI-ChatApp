@@ -10,24 +10,39 @@ import SwiftUI
 
 struct ChatRow : View {
     
-    var text = ""
+    var message : Message
     
-    var myMessage = false
+    var uid : String
     
+    @Environment(\.imageCache) var cache: ImageCache
+
     var body: some View {
         
         HStack {
-            if myMessage {
+            if message.imageUrl != nil{
+                 if message.fromId == uid {
+                               HStack {
+                                   Spacer()
+                                   image
+                               }.padding(.leading,75)
+                           } else {
+                               HStack {
+                                   image
+                                   Spacer()
+                               }.padding(.trailing,75)
+                           }
+            } else {
+            if message.fromId == uid {
                 HStack {
                     Spacer()
-                    Text(text).padding(10)
+                    Text(message.text ?? "").padding(10)
                         .background(Color.blue)
                         .cornerRadius(7)
                         .foregroundColor(.white)
                 }.padding(.leading,75)
             } else {
                 HStack {
-                    Text(text).padding(10)
+                    Text(message.text ?? "").padding(10)
                         .background(Color.secondary)
                         .cornerRadius(28)
                         .foregroundColor(.white)
@@ -35,7 +50,20 @@ struct ChatRow : View {
                 }.padding(.trailing,75)
             }
         }
+        }
     }
+    private var image: some View {
+          AsyncImage(
+            url: URL(string: message.imageUrl ?? "")!,
+              cache: cache,
+              placeholder: Image(systemName: "person.fill"),
+              configuration: { $0.resizable().renderingMode(.original) }
+          )
+              .aspectRatio(contentMode: .fit)
+              .frame(idealWidth: 300)
+              .cornerRadius(10)
+      }
+    
 }
 
 
