@@ -13,11 +13,14 @@ struct ChatLogView: View {
     @ObservedObject var session : SessionStore
     @State var messages = [Message]()
     @State var write = ""
+    @Environment(\.imageCache) var cache: ImageCache
+
 
     init(user : UserData, session : SessionStore) {
         self.user = user
         self.session = session
        UITableView.appearance().separatorStyle = .none
+       UITableView.appearance().tableFooterView = UIView()
     }
 
     var body: some View {
@@ -50,9 +53,29 @@ struct ChatLogView: View {
                 }
             }.padding()
             
-        }.navigationBarTitle(Text(user.name ?? "Unknown"), displayMode: .inline)
+            }.navigationBarTitle(Text(""), displayMode: .inline)
+        .navigationBarItems(leading: titleBar)
         .onAppear(perform: getMessages)
     }
+    
+    private var titleBar: some View {
+        HStack{
+        AsyncImage(
+            url: URL(string: user.profileImageUrl ?? "")!,
+            cache: cache,
+            placeholder: Image(systemName: "person.fill"),
+            configuration: { $0.resizable().renderingMode(.original) }
+        )
+            .aspectRatio(contentMode: .fit)
+            .frame(idealHeight: 30 )
+            .clipShape(Circle())
+            Text(user.name ?? "").fontWeight(.medium)
+        }.padding(.leading,30)
+    }
+
+    
+    
+    
     func getMessages(){
         session.observeMessages { (dictionary,id) in
             var message = Message()

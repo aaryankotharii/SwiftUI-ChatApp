@@ -21,12 +21,10 @@ struct ChatRow : View {
                 HStack {
                     Spacer()
                     Text(text).padding(10)
-                        .frame(maxWidth: 300)
-                        .fixedSize(horizontal: true, vertical: false)
                         .background(Color.blue)
                         .cornerRadius(7)
                         .foregroundColor(.white)
-                }
+                }.padding(.leading,75)
             } else {
                 HStack {
                     Text(text).padding(10)
@@ -34,7 +32,7 @@ struct ChatRow : View {
                         .cornerRadius(28)
                         .foregroundColor(.white)
                     Spacer()
-                }
+                }.padding(.trailing,75)
             }
         }
     }

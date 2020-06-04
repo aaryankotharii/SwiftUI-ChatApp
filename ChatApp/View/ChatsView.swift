@@ -15,6 +15,7 @@ struct ChatsView: View {
     @State var user = UserData()
     @State var activateNavigation : Bool = false
     
+    
     var body: some View {
         NavigationView{
             List(session.messages, id: \.id) { message in

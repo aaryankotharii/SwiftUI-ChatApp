@@ -16,12 +16,16 @@ struct SignupView: View {
     @State private var email : String = ""
     @State private var password : String = ""
     @State private var confirmpassword : String = ""
+    
     @State var error : String = ""
+    
     @State private var showingImagePicker = false
     @State private var inputImage : UIImage?
     @State var profileImage : Image?
+    
     @State private var showingAlert = false
     @State var alertTitle : String = "Uh Oh 🙁"
+    
     @State private var showingActionSheet = false
     @State private var sourceType : UIImagePickerController.SourceType = .photoLibrary
 
@@ -109,17 +113,7 @@ struct SignupView: View {
             guard let result = result else { return }
             
             self.session.createUser(user: UserData(email: self.email, name: self.name, profileImageUrl: "idk", id: result.user.uid))
-            ///UPLAOD USER DATA
-            
-            /*
-             self.session.uploadUser(name: self.name, image: "imageUrl", user: self.session.session!) { (error) in
-                if let error = error{
-                    print(error.localizedDescription)
-                }else {
-                    self.sendImage()
-                }
-            }
-             */
+            self.sendImage()
             self.email = ""
             self.password = ""
         }
@@ -127,7 +121,7 @@ struct SignupView: View {
 
     func sendImage(){
          guard let inputImage = inputImage else { return}
-        //session.createProfile(inputImage)
+         session.createProfile(inputImage)
     }
 
     func errorCheck()->String?{
