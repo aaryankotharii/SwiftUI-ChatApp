@@ -20,34 +20,26 @@ struct ChatRow : View {
         
         HStack {
             if myMessage {
-                Spacer()
-                
                 HStack {
+                    Spacer()
                     Text(text).padding(10)
+                    .frame(minWidth: 50, maxWidth: 300)
                         .background(Color.blue)
                         .cornerRadius(18)
                         .foregroundColor(.white)
-//                        Image(uiImage: UIImage(data: self.image)!)
-//                            .resizable()
-//                                .frame(width: 45, height: 45)
-//                                .clipShape(Circle())
-//                                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+
                 }
             } else {
                 HStack {
-                    //                    Image(uiImage: UIImage(data: self.image)!).resizable()
-                    //                        .frame(width: 45, height: 45)
-                    //                    .clipShape(Circle())
-                    //                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-                    
                     Text(text).padding(10)
                         .background(Color.secondary)
                         .cornerRadius(28)
                         .foregroundColor(.white)
+                    Spacer()
                 }
-                Spacer()
             }
-        }
+            }
+        .background(Color.red)
     }
 }
 
@@ -89,4 +81,12 @@ struct ChatViewRow : View {
             .clipShape(Circle())
     }
 }
+
+
+struct ChatRow_Previews: PreviewProvider {
+    static var previews: some View {
+        ChatRow(text:"This is my messageThis is my messageThis is my messageThis is my messageThis is my messageThis is my messageThis is my message", myMessage: true)
+    }
+}
+
 
