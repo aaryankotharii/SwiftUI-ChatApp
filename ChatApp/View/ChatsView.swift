@@ -20,8 +20,9 @@ struct ChatsView: View {
             List(session.messages) { message in
                 NavigationLink(destination: ChatLogView(user: self.session.getUserFromMSG(message))) {
                     ChatViewRow(user: self.session.getUserFromMSG(message), message : message)
-                    }
-            }
+                }
+                //.listRowInsets(EdgeInsets(top: -20, leading: -20, bottom: -20, trailing: -20))
+                }
             .navigationBarTitle(Text("Chats"), displayMode: .large)
             .navigationBarItems(leading: logoutButton, trailing: newChatButton
             .sheet(isPresented: $showNewChatsView) {

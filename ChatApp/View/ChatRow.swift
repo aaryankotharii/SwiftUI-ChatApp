@@ -13,9 +13,9 @@ struct ChatRow : View {
     var text = ""
     
     var myMessage = false
-  //  var user = ""
+    //  var user = ""
     
-   // @Binding var image : Data
+    // @Binding var image : Data
     var body: some View {
         
         HStack {
@@ -52,14 +52,33 @@ struct ChatRow : View {
 struct ChatViewRow : View {
     var user : UserData
     var message : Message
+    
+    @Environment(\.imageCache) var cache: ImageCache
+    
+    
     var body : some View {
+        
         HStack{
-            Image(systemName : "person.fill")
-            VStack{
+            profilePicture.padding(.trailing,10)
+            VStack(alignment: .leading, spacing: 8){
                 Text(user.name ?? "")
+                    .font(.system(size: 12, weight: .bold))
                 Text(message.text ?? "")
+                    .font(.system(size: 10, weight: .medium))
+                    .foregroundColor(.secondary)
             }
         }
+    }
+    private var profilePicture: some View {
+        AsyncImage(
+            url: URL(string: user.profileImageUrl ?? "")!,
+            cache: cache,
+            placeholder: Image(systemName: "person.fill"),
+            configuration: { $0.resizable().renderingMode(.original) }
+        )
+            .aspectRatio(contentMode: .fit)
+            .frame(idealHeight: 60 )
+            .clipShape(Circle())
     }
 }
 

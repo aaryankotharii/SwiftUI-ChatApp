@@ -25,11 +25,7 @@ class SessionStore : ObservableObject{
     }
     
     @Published var users = [UserData]()
-    @Published var messages = [Message](){
-        didSet{
-            print(messages)
-        }
-    }
+    @Published var messages = [Message]()
     @Published var messagesDictionary = [String:Message]()
         
     var handle : AuthStateDidChangeListenerHandle?
@@ -98,7 +94,6 @@ class SessionStore : ObservableObject{
                     message.toId = (dictionary["toId"] as! String)
                     message.timestamp = (dictionary["timestamp"] as! Int)
                     
-                    print(message)
                     if let chatPatnerId = message.chatPatnerId() {
                         
                         self.messagesDictionary[chatPatnerId]  = message
@@ -145,6 +140,7 @@ class SessionStore : ObservableObject{
                 var user = UserData()
                 user.name = (dictionary["name"] as! String)
                 user.email = (dictionary["email"] as! String)
+                user.profileImageUrl = (dictionary["profileImageUrl"] as! String)
                 user.id = snapshot.key
                 self.users.append(user)
             }

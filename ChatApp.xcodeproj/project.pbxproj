@@ -28,6 +28,9 @@
 		5B375B6524875F8F00935300 /* NewChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B6424875F8F00935300 /* NewChatsView.swift */; };
 		5B375B672487C4D900935300 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B662487C4D900935300 /* ChatLogView.swift */; };
 		5B375B6924881A0500935300 /* ChatRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B6824881A0400935300 /* ChatRow.swift */; };
+		5B375B6F248821E700935300 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B6C248821E700935300 /* ImageCache.swift */; };
+		5B375B70248821E700935300 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B6D248821E700935300 /* ImageLoader.swift */; };
+		5B375B71248821E700935300 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B375B6E248821E700935300 /* AsyncImage.swift */; };
 		720CD5ABEBE5F44D704FBBB5 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74F6CF375EDCA4EECAB9C71 /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,9 @@
 		5B375B6424875F8F00935300 /* NewChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatsView.swift; sourceTree = "<group>"; };
 		5B375B662487C4D900935300 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		5B375B6824881A0400935300 /* ChatRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRow.swift; sourceTree = "<group>"; };
+		5B375B6C248821E700935300 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		5B375B6D248821E700935300 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		5B375B6E248821E700935300 /* AsyncImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		6B298B996159DD6A77E5C70F /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F74F6CF375EDCA4EECAB9C71 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -159,6 +165,7 @@
 		5B375B5B2487555300935300 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				5B375B6B248821E700935300 /* AsyncImage */,
 				5B375B60248756BD00935300 /* Constants.swift */,
 				5B375B4E2486C15F00935300 /* ErrorHandler.swift */,
 				5B375B562486C8AD00935300 /* Keyboard+notification.swift */,
@@ -174,6 +181,16 @@
 				5B375B362486984C00935300 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		5B375B6B248821E700935300 /* AsyncImage */ = {
+			isa = PBXGroup;
+			children = (
+				5B375B6C248821E700935300 /* ImageCache.swift */,
+				5B375B6D248821E700935300 /* ImageLoader.swift */,
+				5B375B6E248821E700935300 /* AsyncImage.swift */,
+			);
+			path = AsyncImage;
 			sourceTree = "<group>";
 		};
 		5DD1D17CD139AEC49D583509 /* Frameworks */ = {
@@ -318,6 +335,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B375B71248821E700935300 /* AsyncImage.swift in Sources */,
 				5B375B63248758EB00935300 /* ChatsView.swift in Sources */,
 				5B375B352486984C00935300 /* AppDelegate.swift in Sources */,
 				5B375B6524875F8F00935300 /* NewChatsView.swift in Sources */,
@@ -327,9 +345,11 @@
 				5B375B512486C2B400935300 /* SignUpView.swift in Sources */,
 				5B375B4F2486C15F00935300 /* ErrorHandler.swift in Sources */,
 				5B375B532486C63200935300 /* CustomModifiers.swift in Sources */,
+				5B375B70248821E700935300 /* ImageLoader.swift in Sources */,
 				5B375B672487C4D900935300 /* ChatLogView.swift in Sources */,
 				5B375B61248756BD00935300 /* Constants.swift in Sources */,
 				5B375B4B24869C3800935300 /* SessionStore.swift in Sources */,
+				5B375B6F248821E700935300 /* ImageCache.swift in Sources */,
 				5B375B392486984C00935300 /* HomeView.swift in Sources */,
 				5B375B5F248756A000935300 /* Message.swift in Sources */,
 				5B375B572486C8AD00935300 /* Keyboard+notification.swift in Sources */,
