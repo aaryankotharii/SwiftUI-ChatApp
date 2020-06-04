@@ -10,13 +10,13 @@ import SwiftUI
 
 struct ChatLogView: View {
     var user : UserData
-    @EnvironmentObject var session : SessionStore
+    @ObservedObject var session : SessionStore
     @State var messages = [Message]()
     @State var write = ""
 
     var body: some View {
         VStack {
-            List(messages) { message in
+            List(messages, id:\.self) { message in
                 if message.fromId == self.session.session?.uid{
                     ChatRow(text: message.text ?? "", myMessage: false)
                 } else {
@@ -49,7 +49,7 @@ struct ChatLogView: View {
     }
     func getMessages(){
         session.observeMessages { (dictionary,id) in
-            var message = Message(id: id)
+            var message = Message()
              if let text = dictionary["text"]{ message.text = (text as! String) }
              message.fromId = (dictionary["fromId"] as! String)
              message.toId = (dictionary["toId"] as! String)

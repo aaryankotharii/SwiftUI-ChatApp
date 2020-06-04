@@ -9,11 +9,11 @@
 import SwiftUI
 
 struct NewChatsView: View {
-    @EnvironmentObject var session : SessionStore
+    @ObservedObject var session : SessionStore
     var body: some View {
         NavigationView{
             List(session.users) { user in
-                NavigationLink(destination: ChatLogView(user: user)) {
+                NavigationLink(destination: ChatLogView(user: user, session: self.session)) {
                     Text(user.name ?? "Unknown")
                 }
             }.navigationBarTitle(Text("New Chat"), displayMode: .inline)
@@ -21,8 +21,4 @@ struct NewChatsView: View {
     }
 }
 
-struct NewChatsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NewChatsView()
-    }
-}
+

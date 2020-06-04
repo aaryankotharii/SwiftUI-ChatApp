@@ -10,28 +10,25 @@ import SwiftUI
 
 struct ChatsView: View {
     @State var messagesDictionary = [String:Message]()
-    @EnvironmentObject var session : SessionStore
+    @ObservedObject var session : SessionStore
     @State var showNewChatsView : Bool = false
     @State var user = UserData()
     @State var activateNavigation : Bool = false
     
     var body: some View {
         NavigationView{
-            List(session.messages) { message in
-                
+            List(session.messages, id: \.id) { message in
                 ZStack {
-                    NavigationLink(destination: ChatLogView(user: self.session.getUserFromMSG(message))) {
+                    NavigationLink(destination: ChatLogView(user: self.session.getUserFromMSG(message), session: self.session)) {
                         EmptyView()
                     }.hidden()
                     ChatViewRow(user: self.session.getUserFromMSG(message), message : message)
                 }
-                
-                
             }
             .navigationBarTitle(Text("Chats"), displayMode: .large)
             .navigationBarItems(leading: logoutButton, trailing: newChatButton
             .sheet(isPresented: $showNewChatsView) {
-                NewChatsView().environmentObject(self.session)
+                NewChatsView(session: self.session)
             })
         }
     }
@@ -57,11 +54,5 @@ struct ChatsView: View {
             self.user = user
             self.activateNavigation = true
         }
-    }
-}
-
-struct ChatsView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatsView()
     }
 }

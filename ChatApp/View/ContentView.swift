@@ -17,7 +17,7 @@ struct ContentView: View {
     var body: some View {
         Group{
             if (session.session != nil){
-                ChatsView()
+                ChatsView(session: self.session)
             }
             else{
                 HomeView()
