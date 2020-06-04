@@ -14,6 +14,12 @@ struct ChatLogView: View {
     @State var messages = [Message]()
     @State var write = ""
 
+    init(user : UserData, session : SessionStore) {
+        self.user = user
+        self.session = session
+       UITableView.appearance().separatorStyle = .none
+    }
+
     var body: some View {
         VStack {
             List(messages, id:\.self) { message in

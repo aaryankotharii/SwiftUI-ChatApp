@@ -13,9 +13,7 @@ struct ChatRow : View {
     var text = ""
     
     var myMessage = false
-    //  var user = ""
     
-    // @Binding var image : Data
     var body: some View {
         
         HStack {
@@ -23,11 +21,11 @@ struct ChatRow : View {
                 HStack {
                     Spacer()
                     Text(text).padding(10)
-                    .frame(minWidth: 50, maxWidth: 300)
+                        .frame(maxWidth: 300)
+                        .fixedSize(horizontal: true, vertical: false)
                         .background(Color.blue)
-                        .cornerRadius(18)
+                        .cornerRadius(7)
                         .foregroundColor(.white)
-
                 }
             } else {
                 HStack {
@@ -38,8 +36,7 @@ struct ChatRow : View {
                     Spacer()
                 }
             }
-            }
-        .background(Color.red)
+        }
     }
 }
 
@@ -79,13 +76,6 @@ struct ChatViewRow : View {
             .aspectRatio(contentMode: .fit)
             .frame(idealHeight: 56 )
             .clipShape(Circle())
-    }
-}
-
-
-struct ChatRow_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatRow(text:"This is my messageThis is my messageThis is my messageThis is my messageThis is my messageThis is my messageThis is my message", myMessage: true)
     }
 }
 
