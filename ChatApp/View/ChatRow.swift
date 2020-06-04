@@ -57,15 +57,20 @@ struct ChatViewRow : View {
     
     
     var body : some View {
-        
         HStack{
             profilePicture.padding(.trailing,10)
-            VStack(alignment: .leading, spacing: 8){
+            VStack(alignment: .leading, spacing: 3){
                 Text(user.name ?? "")
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.system(size: 15, weight: .bold))
                 Text(message.text ?? "")
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.secondary)
+            }
+            Spacer()
+            VStack{
+                Text("\(message.timestamp?.timeStringConverter ?? "")")
+                    .padding(.top,12)
+                Spacer()
             }
         }
     }
