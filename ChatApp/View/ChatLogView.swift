@@ -21,19 +21,18 @@ struct ChatLogView: View {
 
     @State private var sourceType : UIImagePickerController.SourceType = .photoLibrary
 
-
-    init(user : UserData, session : SessionStore) {
-        self.user = user
-        self.session = session
-       UITableView.appearance().separatorStyle = .none
-       UITableView.appearance().tableFooterView = UIView()
-    }
-
     var body: some View {
         VStack {
             List(messages, id:\.self) { message in
                 ChatRow(message: message, uid: self.session.uid)
             }
+//            ScrollView(.vertical, showsIndicators: false) {
+//                VStack{
+//                ForEach(messages, id:\.self) { message in
+//                    ChatRow(message: message, uid: self.session.uid)
+//                }
+//                }
+//            }
             HStack {
                 cameraButtton
                 TextField("message...",text: self.$write).padding(10)
@@ -42,7 +41,6 @@ struct ChatLogView: View {
                 
                 Button(action: {
                     if self.write.count > 0 {
-                        /// send message
                         self.session.sendData(user: self.user, message: self.write)
                         self.write = ""
                     } else {
