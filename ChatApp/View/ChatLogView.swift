@@ -18,9 +18,9 @@ struct ChatLogView: View {
         VStack {
             List(messages, id:\.self) { message in
                 if message.fromId == self.session.session?.uid{
-                    ChatRow(text: message.text ?? "", myMessage: false)
-                } else {
                     ChatRow(text: message.text ?? "", myMessage: true)
+                } else {
+                    ChatRow(text: message.text ?? "", myMessage: false)
                 }
             }
             HStack {

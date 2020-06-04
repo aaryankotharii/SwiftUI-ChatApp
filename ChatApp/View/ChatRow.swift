@@ -23,13 +23,15 @@ struct ChatRow : View {
                 Spacer()
                 
                 HStack {
-                    Text(text).padding(10).background(Color.secondary)
+                    Text(text).padding(10)
+                        .background(Color.blue)
                         .cornerRadius(18)
                         .foregroundColor(.white)
-                    //                    Image(uiImage: UIImage(data: self.image)!).resizable()
-                    //                        .frame(width: 45, height: 45)
-                    //                    .clipShape(Circle())
-                    //                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+//                        Image(uiImage: UIImage(data: self.image)!)
+//                            .resizable()
+//                                .frame(width: 45, height: 45)
+//                                .clipShape(Circle())
+//                                .overlay(Circle().stroke(Color.gray, lineWidth: 1))
                 }
             } else {
                 HStack {
@@ -38,7 +40,8 @@ struct ChatRow : View {
                     //                    .clipShape(Circle())
                     //                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
                     
-                    Text(text).padding(10).background(Color.blue)
+                    Text(text).padding(10)
+                        .background(Color.secondary)
                         .cornerRadius(28)
                         .foregroundColor(.white)
                 }
