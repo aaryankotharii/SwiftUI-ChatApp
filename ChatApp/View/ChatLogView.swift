@@ -86,6 +86,9 @@ struct ChatLogView: View {
             .aspectRatio(contentMode: .fit)
             .frame(idealHeight: 30 )
             .clipShape(Circle())
+            .onTapGesture {
+                
+            }
             Text(user.name ?? "").fontWeight(.medium)
         }.padding(.leading,30)
     }
