@@ -21,6 +21,9 @@ struct ChatLogView: View {
 
     @State private var sourceType : UIImagePickerController.SourceType = .photoLibrary
 
+    @ObservedObject private var keyboard = KeyboardInfo.shared
+
+    
     var body: some View {
         VStack {
             List(messages, id:\.self) { message in
@@ -53,6 +56,7 @@ struct ChatLogView: View {
                     
                 }
             }.padding()
+             .padding(.bottom, self.keyboard.keyboardIsUp ? 300 :0)
             
             }.navigationBarTitle(Text(""), displayMode: .inline)
         .navigationBarItems(leading: titleBar)

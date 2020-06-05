@@ -15,6 +15,7 @@ public class KeyboardInfo: ObservableObject {
     public static var shared = KeyboardInfo()
     
     @Published public var keyboardIsUp : Bool = false
+    @Published public var keyboardHeight : CGFloat = 0
     
     
     private init() {
