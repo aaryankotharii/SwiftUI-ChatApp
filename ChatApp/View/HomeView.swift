@@ -15,8 +15,8 @@ struct HomeView: View {
     @State var error : String = ""
     @State var scale: CGFloat = 0
     @State var blur : CGFloat = 10
-    @State var opacity : Double = 0.5
     @State var angle : Double = 0
+    @State var scale2 : CGFloat = 1.1
     @EnvironmentObject var session : SessionStore
     
     @State private var showingAlert = false
@@ -29,27 +29,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView{
             VStack {
-                HStack{
-                    ZStack(alignment: .bottomTrailing){
-                        Image("bigchat")
-                           // .blur(radius: blur)
-                            .opacity(opacity)
-                        Image("smallchat")
-                            .scaleEffect(scale)
-                            .rotationEffect(.init(degrees: angle), anchor: .center)
-                            .onAppear {
-                                let baseAnimation = Animation.spring(response: 0.5, dampingFraction: 1.0, blendDuration: 0.5)
-                                return withAnimation(baseAnimation) {
-                                    self.scale = 1
-                                    self.opacity = 1
-                                    self.angle = 1080
-                                }
-                            }
-                        .onDisappear{
-                            return self.scale = 0
-                        }
-                    }.padding(.bottom,74)
-                }
+                logo
                 welcomeBack
                 VStack(spacing: 18){
                     Group{
@@ -59,7 +39,6 @@ struct HomeView: View {
                     .modifier(CustomTextField())
                 }.padding(.top,10)
                     .padding(.bottom,50)
-                //.padding(.vertical,64)
                 
                 Button(action: signIn){
                     Text("SIGN IN")
@@ -120,6 +99,29 @@ struct HomeView: View {
             }
             Spacer()
         }
+    }
+    
+    var logo : some View {
+      return  ZStack(alignment: .bottomTrailing){
+                             Image("bigchat")
+                                 .scaleEffect(scale2)
+                             Image("smallchat")
+                                 .scaleEffect(scale)
+                                 .rotationEffect(.init(degrees: angle), anchor: .center)
+                                 .onAppear {
+                                     let baseAnimation = Animation.spring(response: 0.5, dampingFraction: 1.1, blendDuration: 0.5)
+                                     return withAnimation(baseAnimation) {
+                                         self.scale = 1
+                                         self.scale2 = 1
+                                         self.angle = 1080
+                                     }
+                                 }
+                             .onDisappear{
+                                 self.scale = 0
+                                 self.scale2 = 1.1
+                                 self.angle = 0
+                             }
+                         }.padding(.bottom,74)
     }
 }
 

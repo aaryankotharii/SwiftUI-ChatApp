@@ -55,6 +55,9 @@ class SessionStore : ObservableObject{
         do {
             try Auth.auth().signOut()
             self.session = nil
+            self.users = []
+            self.messages = [Message]()
+            self.messagesDictionary = [String:Message]()
         } catch {
             print("Error signing out")
         }
