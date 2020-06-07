@@ -26,16 +26,17 @@ struct ChatLogView: View {
     
     var body: some View {
         VStack {
-            List(messages, id:\.self) { message in
-                ChatRow(message: message, uid: self.session.uid)
-            }
-//            ScrollView(.vertical, showsIndicators: false) {
-//                VStack{
-//                ForEach(messages, id:\.self) { message in
-//                    ChatRow(message: message, uid: self.session.uid)
-//                }
-//                }
+//            List(messages, id:\.self) { message in
+//                ChatRow(message: message, uid: self.session.uid)
 //            }
+            ScrollView(.vertical, showsIndicators: false){
+                VStack(alignment: .center){
+                    ForEach(messages, id:\.self) { message in
+                        ChatRow(message: message, uid: self.session.uid).padding(.vertical,6)
+                    }
+                }.frame(width: 374)
+            }
+
             HStack {
                 cameraButtton
                 TextField("message...",text: self.$write).padding(10)
@@ -77,6 +78,7 @@ struct ChatLogView: View {
                  .cancel()
              ])
          }
+        
     }
     
     private var titleBar: some View {
