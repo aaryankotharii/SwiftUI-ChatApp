@@ -13,6 +13,10 @@ struct HomeView: View {
     @State var email : String = ""
     @State var password : String = ""
     @State var error : String = ""
+    @State var scale: CGFloat = 0
+    @State var blur : CGFloat = 10
+    @State var opacity : Double = 0.5
+    @State var angle : Double = 0
     @EnvironmentObject var session : SessionStore
     
     @State private var showingAlert = false
@@ -24,43 +28,60 @@ struct HomeView: View {
     
     var body: some View {
         NavigationView{
-        VStack {
-            Text("Welcome Back!")
-                .font(.system(size: 32, weight: .heavy, design: .default))
-            Text("sign in to continue")
-                .font(.system(size: 18, weight: .medium))
-                .foregroundColor(bg1)
-            
-            VStack(spacing: 18){
-                Group{
-                TextField("Email address", text: $email)
-                SecureField("Password", text: $password)
+            VStack {
+                HStack{
+                    ZStack(alignment: .bottomTrailing){
+                        Image("bigchat")
+                           // .blur(radius: blur)
+                            .opacity(opacity)
+                        Image("smallchat")
+                            .scaleEffect(scale)
+                            .rotationEffect(.init(degrees: angle), anchor: .center)
+                            .onAppear {
+                                let baseAnimation = Animation.spring(response: 0.5, dampingFraction: 1.0, blendDuration: 0.5)
+                                return withAnimation(baseAnimation) {
+                                    self.scale = 1
+                                    self.opacity = 1
+                                    self.angle = 1080
+                                }
+                            }
+                        .onDisappear{
+                            return self.scale = 0
+                        }
+                    }.padding(.bottom,74)
                 }
+                welcomeBack
+                VStack(spacing: 18){
+                    Group{
+                        TextField("Email address", text: $email)
+                        SecureField("Password", text: $password)
+                    }
                     .modifier(CustomTextField())
-            }
-            .padding(.vertical,64)
-            
-            Button(action: signIn){
-                Text("SIGN IN")
-                .modifier(CustomButton())
-            }
-            .alert(isPresented: $showingAlert) {
-                Alert(title: Text(alertTitle), message: Text(error), dismissButton: .default(Text("OK")))
-            }
-            Spacer()
-            HStack{
-                Text("new here?")
-                    .font(.system(size: 14, weight: .light))
-                    .foregroundColor(.primary)
-                NavigationLink(destination: SignupView()){
-                    Text("Create an account")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(bg2)
+                }.padding(.top,10)
+                    .padding(.bottom,50)
+                //.padding(.vertical,64)
+                
+                Button(action: signIn){
+                    Text("SIGN IN")
+                        .modifier(CustomButton())
+                }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text(alertTitle), message: Text(error), dismissButton: .default(Text("OK")))
+                }
+                Spacer()
+                HStack{
+                    Text("new here?")
+                        .font(.system(size: 14, weight: .light))
+                        .foregroundColor(.primary)
+                    NavigationLink(destination: SignupView()){
+                        Text("Create an account")
+                            .font(.system(size: 14, weight: .semibold))
+                            .foregroundColor(bg2)
+                    }
                 }
             }
+            .padding(.horizontal, 32)
         }
-        .padding(.horizontal, 32)
-    }
     }
     
     func signIn(){
@@ -87,6 +108,19 @@ struct HomeView: View {
         }
         return nil
     }
+    
+    var welcomeBack : some View {
+     return HStack{
+            VStack(alignment: .leading){
+                Text("Welcome Back!")
+                    .font(.system(size: 32, weight: .heavy, design: .default))
+                Text("sign in to continue")
+                    .font(.system(size: 18, weight: .medium))
+                    .foregroundColor(bg1)
+            }
+            Spacer()
+        }
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
@@ -94,3 +128,4 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+
