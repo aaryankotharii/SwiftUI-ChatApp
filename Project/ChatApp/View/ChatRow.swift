@@ -66,7 +66,7 @@ struct chatModifier : ViewModifier{
     func body(content: Content) -> some View {
         content
             .padding(10)
-            .background(myMessage ? Color.blue : Color.secondary)
+            .background(myMessage ? Color.blue : Color("bg1"))
             .cornerRadius(7)
             .foregroundColor(Color.white)
     }
