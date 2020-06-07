@@ -11,7 +11,7 @@ import SwiftUI
 struct ShimmerView: View {
     
     private struct Constants {
-        static let duration: Double = 0.9
+        static let duration: Double = 0.8
         static let minOpacity: Double = 0.25
         static let maxOpacity: Double = 1.0
         static let cornerRadius: CGFloat = 2.0
@@ -23,7 +23,7 @@ struct ShimmerView: View {
     
     public var body: some View {
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            .fill(Color.pink)
+            .fill(Color("bg2"))
             .opacity(opacity)
             .transition(.opacity)
             .onAppear {

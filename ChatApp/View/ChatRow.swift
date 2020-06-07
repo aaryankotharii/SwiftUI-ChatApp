@@ -51,11 +51,11 @@ struct ChatRow : View {
         AsyncImage(
             url: URL(string: message.imageUrl ?? "")!,
             cache: cache,
-            placeholder: Image(systemName: "person.fill"),
+            placeholder: ShimmerView().frame(width: 291, height: 291),
             configuration: { $0.resizable().renderingMode(.original) }
         )
             .aspectRatio(contentMode: .fit)
-            .frame(idealWidth: 300)
+            .frame(idealWidth: 291, idealHeight: 291)
             .cornerRadius(10)
     }
 }
