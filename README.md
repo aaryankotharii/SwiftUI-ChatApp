@@ -11,8 +11,7 @@
 
 ## Screenshots 📷
  <p float="left">
- <img src ="Assets/gif.gif" width = "250" hspace="30"  />
- <img src ="Assets/12.png" width = "600"  /> 
+ <img src ="Assets/asset.png" /> 
  </p>
  
  
